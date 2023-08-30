@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BsFillHeartFill, BsSearch } from "react-icons/bs";
@@ -20,11 +21,11 @@ function Home() {
       const dogs =
         data.message.length >= 11 ? data.message.slice(0, 10) : data.message;
 
-      //creating object list of keys imgSrc and isFavorite(isFav)
+      //creating object list of keys imgSrc and isFavorite
       setBreeds(
         dogs.map((img) => ({
           imgSrc: img,
-          isFav: false,
+          isFavorite: false,
         }))
       );
 
@@ -48,19 +49,23 @@ function Home() {
     fetchDogs();
   };
 
-  const handleFavorite = (src) => {
+  const handleAddFavorite = (src) => {
     const favoriteItem = breeds.find((item) => item.imgSrc === src);
-    favoriteItem.isFav = !favoriteItem.isFav;
-
-    if (favoriteItem.isFav) {
-      const updatedFavList = [favoriteItem, ...favoriteList];
-      setFavoriteList(updatedFavList);
-    } else if (!favoriteItem.isFav) {
-      const removedItemFromFavList = favoriteList.filter(
-        (item) => item.imgSrc !== src
-      );
-      setFavoriteList(removedItemFromFavList);
+    favoriteItem.isFavorite = true;
+    if (!favoriteList.some((item) => item.imgSrc === src)) {
+      const addNewItemToFavList = [favoriteItem, ...favoriteList];
+      setFavoriteList(addNewItemToFavList);
     }
+  };
+
+  const handleRemoveFavorite = (src) => {
+    const itemToRemove = favoriteList.find((item) => item.imgSrc === src);
+    itemToRemove.isFavorite = false;
+
+    const removedItemFromFavList = favoriteList.filter(
+      (item) => item.imgSrc !== src
+    );
+    setFavoriteList(removedItemFromFavList);
   };
 
   //on initial render
@@ -68,8 +73,6 @@ function Home() {
     fetchDogs();
     fetchAllBreeds();
   }, []);
-
-  console.log(breeds);
 
   return (
     <>
@@ -117,8 +120,8 @@ function Home() {
                     borderRadius: "0.3rem",
                   }}
                 />
-                <div onClick={() => handleFavorite(item.imgSrc)}>
-                  {item.isFav ? (
+                <div onClick={() => handleAddFavorite(item.imgSrc)}>
+                  {item.isFavorite ? (
                     <BsFillHeartFill className="red-heart" />
                   ) : (
                     <BsFillHeartFill className="white-heart" />
@@ -150,8 +153,8 @@ function Home() {
                   borderRadius: "0.3rem",
                 }}
               />
-              <div onClick={() => handleFavorite(item.imgSrc)}>
-                {item.isFav ? (
+              <div onClick={() => handleRemoveFavorite(item.imgSrc)}>
+                {item.isFavorite ? (
                   <BsFillHeartFill className="red-heart" />
                 ) : (
                   <BsFillHeartFill className="white-heart" />
