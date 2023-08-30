@@ -1,0 +1,99 @@
+.header .title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Search bar */
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search .input {
+  all: initial;
+  font-family: inherit;
+  padding:0 0.5rem;
+  background-color: #f7f7f7;
+  border: none;
+  border-right: transparent;
+  height: 36px;
+  width: 100%;
+}
+
+.search .btn-search {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: white;
+  background-color: #0794e3;
+  border: none;
+  height: 36px;
+  border-radius: 0.2rem;
+  transition: all 400ms ease;
+}
+
+.search .btn-search:hover {
+  transform: scale(1.03);
+}
+
+.search .btn-search:active {
+  transform: scale(1);
+}
+
+/* images styling */
+.main .image {
+  width: 160px;
+  position: relative;
+  margin: 0.5rem;
+}
+
+.main .dog-breeds {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* heart symbol styling */
+.main .white-heart,
+.main .red-heart {
+  position: absolute;
+  right: 0.4rem;
+  bottom: 0.4rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.main .white-heart {
+  color: white;
+}
+
+.main .red-heart {
+  color: red;
+}
+
+/* favorite list  */
+
+.favorite-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.line {
+  border: 1px solid black;
+}
+
+/* media queries for mobile phone */
+
+@media screen and (max-width: 600px) {
+  .main .image {
+    width: 100px;
+    margin: 0.2rem;
+  }
+
+  .main .white-heart,
+  .main .red-heart {
+    font-size: 0.8rem;
+  }
+}
